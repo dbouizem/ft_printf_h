@@ -6,12 +6,11 @@
 /*   By: dbouizem <djihane.bouizem@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 17:09:43 by dbouizem          #+#    #+#             */
-/*   Updated: 2025/01/19 17:09:51 by dbouizem         ###   ########.fr       */
+/*   Updated: 2025/02/02 03:01:48 by dbouizem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <limits.h>
 
 int	main(void)
 {
@@ -23,7 +22,7 @@ int	main(void)
 	printf("------\n");
 
 	// Test pour les chaînes
-	ret = ft_printf("String: %s\n", "Hello World!");
+	ret = ft_printf("String: %s\n", "Testing my s specifier!");
 	printf("ft_printf returned: %d\n", ret);
 	printf("------\n");
 

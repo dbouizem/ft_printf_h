@@ -1,46 +1,44 @@
 NAME = libftprintf.a
-
 CC = gcc
-CFLAGSES = -Wall -Wextra -Werror
-
+CFLAGS = -Wall -Wextra -Werror
 LIBFT_PATH = ./libft
 LIBFT = $(LIBFT_PATH)/libft.a
 
 SRCS = ft_printf.c \
-	main.c
+	main.c \
+	handlers/handle_char.c \
+	handlers/handle_string.c \
+	handlers/handle_pointer.c \
+	handlers/handle_int.c \
+	handlers/handle_uint.c \
+	handlers/handle_hex.c \
+	handlers/handle_oct.c \
+	utils/ft_print_char.c \
+	utils/ft_print_string.c \
+	utils/ft_print_hex.c
 
 OBJS = $(SRCS:.c=.o)
 
-$(LIBFT) :
-	cd $(LIBFT_PATH) && make
-	cp $(LIBFT) $(NAME)
-
 all : $(NAME)
-bonus : all
 
-$(NAME) : $(OBJS)
-	@ar rcs $(NAME) $(OBJS) $(OBJS_BONUS)
+$(NAME) : $(LIBFT) $(OBJS)
+	cp $(LIBFT) $@
+	ar rcs $@ $(OBJS)
+
+$(LIBFT) :
+	$(MAKE) -C $(LIBFT_PATH)
 
 %.o : %.c
-	$(CC) $(CFLAGSES) -c $< -o $@
-
-
+	$(CC) $(CFLAGS) -I$(LIBFT_PATH) -c $< -o $@
 
 clean :
-	@rm -f $(OBJS) $(OBJS_BONUS)
+	@rm -f $(OBJS)
+	$(MAKE) -C $(LIBFT_PATH) clean
 
 fclean : clean
 	@rm -rf $(NAME)
+	$(MAKE) -C $(LIBFT_PATH) fclean
 
 re : fclean all
 
-rebonus : fclean bonus
-	cd $(LIBFT_PATH) && make fclean
-
-.PHONY : all clean fclean re bonus rebonus
-
-
-
-
-
-
+.PHONY : all clean fclean re
